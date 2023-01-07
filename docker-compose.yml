@@ -1,0 +1,41 @@
+version: '3.8'
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./backend:/app
+    environment:
+      - MONGO_URI=mongodb+srv://psam6175:oUVLQHB1oi0WuS9L@blackcoffer-cluster.fxppz.mongodb.net/?retryWrites=true&w=majority&appName=blackcoffer-cluster
+    depends_on:
+      - mongo
+    networks:
+      - blackcoffer-network
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    depends_on:
+      - backend
+    networks:
+      - blackcoffer-network
+
+  mongo:
+    image: mongo:7
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - blackcoffer-network
+
+volumes:
+  mongodb_data:
+
+networks:
+  blackcoffer-network:
