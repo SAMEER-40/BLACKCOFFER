@@ -1,14 +1,12 @@
-import { useState } from 'react'
-import './App.css'
-
-import Dashboard from './pages/Dashboard'
+// src/App.jsx
+import DashboardLayout from "./layouts/DashboardLayouts"
+import Dashboard from "./pages/Dashboard"
 
 function App() {
-  return (
-    <div className="min-h-screen bg-gray-100 p-4">
-      <Dashboard />
-    </div>
-  )
+    return (
+        <DashboardLayout>
+            <Dashboard />
+        </DashboardLayout>
+    )
 }
-
 export default App

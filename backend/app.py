@@ -11,6 +11,7 @@ CORS(app)
 
 client = MongoClient(os.getenv("MONGO_URI"))
 db = client.blackcoffer_db
+
 collection = db.records
 
 # Updated filter list based on your needs
