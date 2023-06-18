@@ -1,4 +1,4 @@
-FROM node:20
+FROM node:20 as builder
 
 WORKDIR /app
 
@@ -8,4 +8,13 @@ RUN npm install --legacy-peer-deps
 
 COPY . .
 
-CMD ["npm", "run", "dev"]
+RUN npm run build
+
+# Use nginx to serve
+FROM nginx:alpine
+
+COPY --from=builder /app/dist /usr/share/nginx/html
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
