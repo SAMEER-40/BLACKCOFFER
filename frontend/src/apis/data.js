@@ -1,7 +1,7 @@
 // src/apis/data.js
 export const fetchData = async (filters = {}) => {
   const query = new URLSearchParams(filters).toString()
-  const response = await fetch(`http://localhost:5000/api/data?${query}`)
+  const response = await fetch(`http://localhost:5000?${query}`)
   if (!response.ok) {
       throw new Error('Failed to fetch data')
   }

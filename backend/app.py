@@ -26,7 +26,7 @@ OPTIONAL_FIELDS = [
     'published', 'relevance', 'title', 'likelihood'
 ]
 
-@app.route('/api/data', methods=['GET'])
+@app.route('/', methods=['GET'])
 def get_data():
     filters = {}
 
