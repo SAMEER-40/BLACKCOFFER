@@ -6,11 +6,9 @@ services:
       context: ./backend
     ports:
       - "5000:5000"
-    environment:
-      - MONGO_URI=mongodb://mongo:27017/blackcoffer_db
-    depends_on:
-      - mongo
-
+    env_file:
+      - ./backend/.env  # This should contain your MongoDB Atlas URL like MONGO_URI=mongodb+srv://...
+  
   frontend:
     build:
       context: ./frontend
@@ -18,13 +16,3 @@ services:
       - "80:80"
     depends_on:
       - backend
-
-  mongo:
-    image: mongo:6
-    ports:
-      - "27017:27017"
-    volumes:
-      - mongo_data:/data/db
-
-volumes:
-  mongo_data:
