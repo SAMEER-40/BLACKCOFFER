@@ -4,27 +4,23 @@ services:
   backend:
     build:
       context: ./backend
-      dockerfile: Dockerfile
     ports:
       - "5000:5000"
-    volumes:
-      - ./backend:/app
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/blackcoffer_db
     depends_on:
       - mongo
 
   frontend:
     build:
       context: ./frontend
-      dockerfile: Dockerfile
     ports:
-      - "5173:5173"
-    volumes:
-      - ./frontend:/app
-    stdin_open: true
-    tty: true
+      - "80:80"
+    depends_on:
+      - backend
 
   mongo:
-    image: "mongo"
+    image: mongo:6
     ports:
       - "27017:27017"
     volumes:
